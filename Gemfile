@@ -1,4 +1,4 @@
-source 'https://rubygems.org'
+source 'http://ruby.taobao.org/'
 ruby '2.0.0'
 
 gem 'sinatra', :require => 'sinatra/base'
@@ -13,6 +13,7 @@ gem 'bcrypt-ruby'
 gem 'rack-ssl'
 gem 'omniauth-twitter'
 gem 'omniauth-github'
+gem 'omniauth-weibo-oauth2'
 gem 'rake'
 gem 'rdiscount'
 gem 'mail'
