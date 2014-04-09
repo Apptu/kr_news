@@ -44,8 +44,13 @@ module Brisk
 
       def self.from_auth!(auth)
         auth           = auth.with_indifferent_access
-        user           = find_by_uid(auth[:uid]) || self.new
+        user           = find_by_uid(auth[:uid].to_s) || self.new
         user.uid       = auth[:uid]
+
+        # if not ["1765365835", "1812045851", "1913646873"].include?(user.uid.to_s)
+        #   return
+        # end
+
         user.provider  = auth[:provider]
         user.auth      = auth.except(:extra)
         user.name    ||= auth[:info][:name]
@@ -53,7 +58,7 @@ module Brisk
         user.handle  ||= auth[:info][:nickname]
         user.about   ||= auth[:info][:description]
         user.save
-        user
+        user 
       end
 
       def url
@@ -63,6 +68,8 @@ module Brisk
             urls[:Website]
           when 'github'
             urls[:Blog]
+          when 'weibo'
+            urls[:Weibo]
           end
         end
       end
@@ -102,7 +109,7 @@ module Brisk
       end
 
       def after_create
-        check_invite!
+        #check_invite!
       end
 
       def karma!
@@ -135,6 +142,8 @@ module Brisk
         when 'twitter'
           self.twitter = handle
         when 'github'
+          self.github  = handle
+        when 'weibo'
           self.github  = handle
         end
       end
@@ -180,7 +189,8 @@ module Brisk
         invite = UserInvite.pending.matching(
           email:   email,
           twitter: twitter,
-          github:  github
+          github:  github,
+          weibo:  weibo
         ).first
 
         activate!(invite) if invite

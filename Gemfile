@@ -29,6 +29,8 @@ gem 'gibbon', :git => 'https://github.com/amro/gibbon.git'
 gem 'dotenv'
 
 group :development do
+#	gem 'pry', '~> 0.9.12.6'
+  gem "better_errors"
   gem 'thin'
   gem 'debugger'
 end

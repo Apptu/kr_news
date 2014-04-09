@@ -51,6 +51,9 @@ module Brisk
         app.set :github_key, ENV['GITHUB_KEY']
         app.set :github_secret, ENV['GITHUB_SECRET']
 
+        app.set :weibo_key, ENV['WEIBO_KEY']
+        app.set :weibo_secret, ENV['WEIBO_SECRET']
+
         app.use OmniAuth::Builder do
           provider :twitter,
                    app.twitter_key,
@@ -60,6 +63,11 @@ module Brisk
           provider :github,
                    app.github_key,
                    app.github_secret
+
+          provider :weibo,
+                   app.weibo_key,
+                   app.weibo_secret
+
         end
 
         app.set(:auth) do |type|
