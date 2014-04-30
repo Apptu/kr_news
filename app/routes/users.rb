@@ -3,6 +3,12 @@ module Brisk
     class Users < Base
       get '/auth/:platform/callback' do
         self.current_user = User.from_auth!(env['omniauth.auth'])
+        
+        # 验证失败
+        if self.current_user == nil
+          session.destroy
+          halt 422, '认证失败！请检查您是否已经获得36Kr授权…… 联系路遥获得权限。'
+        end
 
         if pending_invite
           current_user.activate!(pending_invite)

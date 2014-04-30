@@ -3,6 +3,7 @@
 </header>
 
 <article>
-  <a href="/auth/twitter" class="twitter">Connect with Twitter</a>
-  <a href="/auth/weibo" class="github">Connect with Weibo</a>
+  <!-- <a href="/auth/twitter" class="twitter">Connect with Twitter</a> -->
+  <a href="/auth/weibo" class="weibo">Connect with Weibo</a>
+
 </article>

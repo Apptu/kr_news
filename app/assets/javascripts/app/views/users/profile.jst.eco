@@ -35,6 +35,14 @@
         </span>
       <% end %>
 
+      <% if @user.get('weibo'): %>
+        <span class="weibo">
+          <a href="http://weibo.com/<%= @user.get('weibo') %>">
+            <%= @user.get('weibo') %>
+          </a>
+        </span>
+      <% end %>
+
       <span class="about"><%= @user.get('about') %></span>
     </div>
   </section>

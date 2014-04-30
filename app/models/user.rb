@@ -44,13 +44,14 @@ module Brisk
 
       def self.from_auth!(auth)
         auth           = auth.with_indifferent_access
+        
+        if not ENV['PERMITTED_UIDS'].include?(auth[:uid].to_s)
+          user = nil
+          return
+        end
+
         user           = find_by_uid(auth[:uid].to_s) || self.new
         user.uid       = auth[:uid]
-
-        # if not ["1765365835", "1812045851", "1913646873"].include?(user.uid.to_s)
-        #   return
-        # end
-
         user.provider  = auth[:provider]
         user.auth      = auth.except(:extra)
         user.name    ||= auth[:info][:name]
@@ -142,8 +143,6 @@ module Brisk
         when 'twitter'
           self.twitter = handle
         when 'github'
-          self.github  = handle
-        when 'weibo'
           self.github  = handle
         end
       end
